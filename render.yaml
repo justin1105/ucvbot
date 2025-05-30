@@ -15,16 +15,14 @@ services:
     region: oregon
     plan: free
     buildCommand: npm install && npm run build --prefix Chatbot-Frontend
-    staticPublishPath: Chatbot-Frontend/dist/
+    startCommand: npx http-server Chatbot-Frontend/dist/ -p 3000
     rootDir: Chatbot-Frontend
     autoDeploy: true
 
   - type: web
     name: ucvbot-chat-java
-    env: java
+    env: docker
     region: oregon
     plan: free
-    buildCommand: ./mvnw clean package
-    startCommand: java -jar target/ucvbot-0.0.1-SNAPSHOT.jar
     rootDir: ucvbot
     autoDeploy: true
