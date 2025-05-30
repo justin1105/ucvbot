@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: ucvbot-backend
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r Chatbot-Backend/requirements.txt
+    startCommand: python Chatbot-Backend/app.py
+    rootDir: Chatbot-Backend
+    autoDeploy: true
+
+  - type: web
+    name: ucvbot-frontend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build --prefix Chatbot-Frontend
+    staticPublishPath: Chatbot-Frontend/dist/
+    rootDir: Chatbot-Frontend
+    autoDeploy: true
+
+  - type: web
+    name: ucvbot-chat-java
+    env: java
+    region: oregon
+    plan: free
+    buildCommand: ./mvnw clean package
+    startCommand: java -jar target/ucvbot-0.0.1-SNAPSHOT.jar
+    rootDir: ucvbot
+    autoDeploy: true
